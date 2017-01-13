@@ -13,16 +13,10 @@ private:
 
   BST_Node *_root;
   int _size;
-  
+
+  BST_Node* _insert(BST_Node *n, T data);
+
 public:
-
-  BST();
-  BST(const BST &tree);
-  BST& operator=(const BST &tree);
-  ~BST();
-
-  int size() const;
-  void insert(T data);
 
   /* Iterator */
   friend class iterator;
@@ -44,6 +38,16 @@ public:
     BST<T>::BST_Node *_root;
   };
   /* End iterator */
+
+  BST();
+  BST(const BST &tree);
+  BST& operator=(const BST &tree);
+  ~BST();
+
+  int size() const;
+  void insert(T data);
+
+  iterator root() const;
 };
 
 #include "BST.t"
