@@ -24,5 +24,13 @@ int main() {
   bst.insert(15);
   bst.insert(9);
   print_BST(bst.root(), 0);
+
+  cout<<endl;
+  BST<int> bst_c(bst);
+  print_BST(bst_c.root(), 0);
+
+  cout<<endl;
+  BST<int> bst_o = bst_c;
+  print_BST(bst_o.root(), 0);
   return 0;
 }

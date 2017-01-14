@@ -4,12 +4,20 @@ BST<T>::BST() : _root(NULL), _size(0) { }
 
 template <typename T>
 BST<T>::BST(const BST &tree) {
-
+  _root = _copy(tree._root);
 }
 
 template <typename T>
 BST<T>& BST<T>::operator=(const BST &tree) {
+  BST_Node *aux = _root;
+  try {
+    _root = _copy(tree._root);
+  } catch(...) {
+    _root = aux;
+    throw;
+  }
 
+  return *this;
 }
 /* End Inits */
 
@@ -48,6 +56,7 @@ typename BST<T>::BST_Node* BST<T>::_insert(BST_Node *n, T data) {
     BST_Node *nod = new BST_Node;
     nod->data = data;
     nod->left = nod->right = NULL;
+    _size++;
     return nod;
   }
 
@@ -69,6 +78,24 @@ void BST<T>::_delete(BST_Node *n) {
     n = NULL;
   }
 }
+
+template <typename T>
+typename BST<T>::BST_Node* BST<T>::_copy(BST_Node *n) {
+  BST_Node *aux = NULL;
+  if(n != NULL) {
+    aux = new BST_Node;
+    try {
+      aux->data = n->data;
+      aux->left = _copy(n->left);
+      aux->right = _copy(n->right);
+    } catch(...) {
+      _delete(_root);
+      throw;
+    }
+  }
+
+  return aux;
+}
 /* End Private Api */
 
 /* Iterator */
@@ -88,8 +115,7 @@ typename BST<T>::iterator& BST<T>::iterator::operator=(const iterator &it) {
 
 /* - Iterator Deinits - */
 template <typename T>
-BST<T>::iterator::~iterator() {
-}
+BST<T>::iterator::~iterator() {}
 
 /* - Iterator Consultors */
 template <typename T>
