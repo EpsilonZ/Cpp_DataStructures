@@ -16,7 +16,7 @@ BST<T>& BST<T>::operator=(const BST &tree) {
 /* Deinits */
 template <typename T>
 BST<T>::~BST() {
-
+  _delete(_root);
 }
 
 /* End Deinits */
@@ -58,6 +58,16 @@ typename BST<T>::BST_Node* BST<T>::_insert(BST_Node *n, T data) {
   }
 
   return n;
+}
+
+template <typename T>
+void BST<T>::_delete(BST_Node *n) {
+  if (n != NULL) {
+    _delete(n->left);
+    _delete(n->right);
+    delete n;
+    n = NULL;
+  }
 }
 /* End Private Api */
 

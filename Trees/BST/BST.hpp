@@ -15,6 +15,7 @@ private:
   int _size;
 
   BST_Node* _insert(BST_Node *n, T data);
+  void _delete(BST_Node *n);
 
 public:
 
