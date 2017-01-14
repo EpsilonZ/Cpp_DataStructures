@@ -50,6 +50,13 @@ template <typename T>
 void BST<T>::insert(T data) {
   _root = _insert(_root, data);
 }
+
+template <typename T>
+BST<T> BST<T>::operator+(const BST &tree) {
+  BST<T> aux;
+  aux._root = _sum_nodes(_root, tree._root);
+  return aux;
+}
 /* End Modifiers */
 
 /* Private Api*/
@@ -95,6 +102,29 @@ typename BST<T>::BST_Node* BST<T>::_copy(BST_Node *n) {
       _delete(_root);
       throw;
     }
+  }
+
+  return aux;
+}
+
+template <typename T>
+typename BST<T>::BST_Node* BST<T>::_sum_nodes(BST_Node *pi_node, BST_Node *p_node) {
+  BST_Node *aux = NULL;
+  if (pi_node != NULL && p_node != NULL) {
+    aux = new BST_Node;
+    aux->data = pi_node->data + p_node->data;
+    aux->left = _sum_nodes(pi_node->left, p_node->left);
+    aux->right = _sum_nodes(pi_node->right, p_node->right);
+  } else if (p_node != NULL){
+    aux = new BST_Node;
+    aux->data = p_node->data;
+    aux->left = _sum_nodes(pi_node, p_node->left);
+    aux->right = _sum_nodes(pi_node, p_node->right);
+  } else if (pi_node != NULL) {
+    aux = new BST_Node;
+    aux->data = pi_node->data;
+    aux->left = _sum_nodes(pi_node->left, p_node);
+    aux->right = _sum_nodes(pi_node->right, p_node);
   }
 
   return aux;

@@ -88,10 +88,42 @@ void is_binary_tree(){
   cout<<"Is binary : "<<r_is_binary_tree(bst.root(), INT_MIN, INT_MAX)<<endl;
 
 }
+
+/*
+  @sum_trees
+  @discussion : Create a new tree where each node will have the sum of the nodes in the same position
+  in the other trees. If node no exists in both trees, nothing will happens, if just one tree has a node,
+  the new tree will contain a node with this value.
+  @cost : O(n) where n is the number of nodes of the bigger tree.
+*/
+void sum_trees() {
+  BST<int> bst;
+  bst.insert(9);
+  bst.insert(6);
+  bst.insert(7);
+  bst.insert(12);
+  bst.insert(10);
+  print_BST(bst.root(), 0);
+  cout<<"\n\n\n";
+
+  BST<int> bst_a;
+  bst_a.insert(15);
+  bst_a.insert(8);
+  bst_a.insert(4);
+  bst_a.insert(20);
+  bst_a.insert(17);
+  print_BST(bst_a.root(), 0);
+  cout<<"\n\n\n";
+
+  BST<int> bst_sum = bst+bst_a;
+  print_BST(bst_sum.root(), 0);
+
+}
 /* End exam exercicies */
 
 int main() {
   // common_tests();
-  is_binary_tree();
+  // is_binary_tree();
+  // sum_trees();
   return 0;
 }

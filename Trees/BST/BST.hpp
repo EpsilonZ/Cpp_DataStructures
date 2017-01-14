@@ -17,6 +17,7 @@ private:
   BST_Node* _insert(BST_Node *n, T data);
   void _delete(BST_Node *n);
   BST_Node* _copy(BST_Node *n);
+  BST_Node* _sum_nodes(BST_Node *pi_node, BST_Node *p_node);
 
 public:
 
@@ -44,6 +45,7 @@ public:
   BST();
   BST(const BST &tree);
   BST& operator=(const BST &tree);
+  BST operator+(const BST &tree);
   ~BST();
 
   int size() const;
