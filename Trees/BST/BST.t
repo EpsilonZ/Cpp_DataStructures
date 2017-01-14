@@ -5,6 +5,7 @@ BST<T>::BST() : _root(NULL), _size(0) { }
 template <typename T>
 BST<T>::BST(const BST &tree) {
   _root = _copy(tree._root);
+  _size = tree._size;
 }
 
 template <typename T>
@@ -16,6 +17,8 @@ BST<T>& BST<T>::operator=(const BST &tree) {
     _root = aux;
     throw;
   }
+
+  _size = tree._size;
 
   return *this;
 }
