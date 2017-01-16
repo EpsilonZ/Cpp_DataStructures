@@ -1,9 +1,6 @@
 #ifndef _HASHTABLE_HPP_
 #define _HASHTABLE_HPP_
 
-#include <iostream>
-using namespace std;
-
 template <typename Key>
 class Hashtable {
 private:
