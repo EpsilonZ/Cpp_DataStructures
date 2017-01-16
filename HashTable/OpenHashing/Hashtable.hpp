@@ -1,7 +1,5 @@
 #ifndef _HASHTABLE_HPP_
 #define _HASHTABLE_HPP_
-#include "Hash.hpp"
-
 
 #include <iostream>
 using namespace std;
@@ -20,11 +18,40 @@ private:
   unsigned int _count;
 
   int _hash(const Key &key) const;
+  void _delete();
+  void _copy(Hash_node **p_table);
 public:
 
+  /*
+    @Init()
+    @params
+    @discussion Create a new hashtable with a default table size;
+    @return
+  */
   Hashtable();
+
+  /*
+    @Init(h : Hashtable)
+    @params h : Hashtable
+    @discussion Create a copy from h
+    @return
+  */
   Hashtable(const Hashtable &h);
+
+  /*
+    @Operator=(h : Hashtable)
+    @params h : Hashtable
+    @discussion Create a copy from h if anything goes wrong. If it's, restore the hashtable.
+    @return Pointer to the hashtable with values copied.
+  */
   Hashtable& operator=(const Hashtable &h);
+
+  /*
+    @Destructor
+    @params
+    @discussion Destroy the hashtable and free the dynamic memory
+    @return
+  */
   ~Hashtable();
 
 
