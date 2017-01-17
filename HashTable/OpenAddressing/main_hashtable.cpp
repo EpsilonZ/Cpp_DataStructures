@@ -13,5 +13,9 @@ int main() {
   cout<<hashtable.contains(5)<<endl;
   cout<<hashtable.contains(7)<<endl;
   hashtable.print_hash(cout);
+
+  Hashtable<int> hashtable_c(hashtable);
+  cout<<endl;
+  hashtable_c.print_hash(cout);
   return 0;
 }

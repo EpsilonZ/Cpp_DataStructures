@@ -1,6 +1,9 @@
 #ifndef _HASHTABLE_HPP_
 #define _HASHTABLE_HPP_
 
+#include <iostream>
+using namespace std;
+
 template <typename Key>
 class Hashtable {
 private:
@@ -8,7 +11,7 @@ private:
   struct Hash_node {
     Key _k;
     Estat _est;
-    // Hash_node(const Key &k);
+    Hash_node();
   };
 
   Hash_node *_table;

@@ -1,19 +1,17 @@
 /* Inits */
 template <typename Key>
+Hashtable<Key>::Hash_node::Hash_node() : _est(lliure) { }
+
+template <typename Key>
 Hashtable<Key>::Hashtable() : _count(0) {
     _table_size = 20;
     _table = new Hash_node[_table_size];
-
-    for (int i = 0; i < _table_size; i++) {
-      Hash_node hash = Hash_node();
-      hash._est = lliure;
-      _table[i] = hash;
-    }
 }
 
 template <typename Key>
 Hashtable<Key>::Hashtable(const Hashtable &h) : _table_size(h._table_size){
-
+  _table_size = h._table_size;
+  _copy(h._table);
 }
 
 template <typename Key>
@@ -111,7 +109,12 @@ int Hashtable<Key>::_hash(const Key &k) const {
 
 template <typename Key>
 void Hashtable<Key>::_copy(Hash_node *p_table) {
-
+  _table = new Hash_node[_table_size];
+  for (unsigned int i = 0; i < _table_size; i++) {
+    _table[i]._k = p_table[i]._k;
+    _table[i]._est = p_table[i]._est;
+    _count++;
+  }
 }
 
 template <typename Key>
