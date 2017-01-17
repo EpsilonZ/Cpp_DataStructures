@@ -17,5 +17,9 @@ int main() {
   Hashtable<int> hashtable_c(hashtable);
   cout<<endl;
   hashtable_c.print_hash(cout);
+
+  Hashtable<int> hashtable_o(hashtable_c);
+  cout<<endl;
+  hashtable_o.print_hash(cout);
   return 0;
 }

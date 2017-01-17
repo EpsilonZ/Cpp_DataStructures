@@ -11,11 +11,28 @@ Hashtable<Key>::Hashtable() : _count(0) {
 template <typename Key>
 Hashtable<Key>::Hashtable(const Hashtable &h) : _table_size(h._table_size){
   _table_size = h._table_size;
-  _copy(h._table);
+  try {
+    _copy(h._table);
+  } catch(...) {
+    _delete();
+    throw;
+  }
 }
 
 template <typename Key>
 Hashtable<Key>& Hashtable<Key>::operator=(const Hashtable &h) {
+  Hash_node *aux_table = _table;
+  int aux_table_size = _table_size;
+
+  _table_size = h._table_size;
+  try {
+    _copy(h._table);
+  } catch(...) {
+    _delete();
+    _table = aux_table;
+    _table_size = aux_table_size;
+    throw;
+  }
   return *this;
 }
 /* End Inits */
