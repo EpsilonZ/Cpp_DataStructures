@@ -4,7 +4,7 @@ Hashtable<Key>::Hash_node::Hash_node() : _est(lliure) { }
 
 template <typename Key>
 Hashtable<Key>::Hashtable() : _count(0) {
-    _table_size = 20;
+    _table_size = 4;
     _table = new Hash_node[_table_size];
 }
 
@@ -57,11 +57,12 @@ int Hashtable<Key>::_find(const Key &k) const {
   int first_empty = -1;
   unsigned int cont = 0;
 
-  while (_table[i]._k != k &&_table[i]._est != lliure && cont < _table_size) {
+  while (_table[i]._k != k &_table[i]._est != lliure && cont < _table_size) {
     if (_table[i]._est == esborrat && first_empty == -1) {
       first_empty = i;
     }
     i = (i+1)%_table_size;
+    cont++;
   }
 
   if(_table[i]._est == lliure and _table[i]._k != k) {
@@ -97,7 +98,8 @@ template <typename Key>
 void Hashtable<Key>::insert(const Key &k) {
   int i = _find(k);
   if(_table[i]._est == ocupat && _table[i]._k != k) {
-    
+    _rehash();
+    i = _hash(k);
   }
 
   if(_table[i]._est != ocupat) {
@@ -137,5 +139,21 @@ void Hashtable<Key>::_copy(Hash_node *p_table) {
 template <typename Key>
 void Hashtable<Key>::_delete() {
   delete[] _table;
+}
+
+template <typename Key>
+void Hashtable<Key>::_rehash() {
+  int aux_size = _table_size;
+  Hash_node *t = _table;
+
+  _table_size *= 2;
+  _count = 0;
+  _table = new Hash_node[_table_size];
+
+  for(int i = 0; i < aux_size*2; i++) {
+    int h = _hash(t[i]._k);
+    _table[h]._k = t[i]._k;
+    _table[h]._est = ocupat;
+  }
 }
 /* End private api */

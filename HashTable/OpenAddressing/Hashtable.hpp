@@ -1,9 +1,6 @@
 #ifndef _HASHTABLE_HPP_
 #define _HASHTABLE_HPP_
 
-#include <iostream>
-using namespace std;
-
 template <typename Key>
 class Hashtable {
 private:
@@ -22,6 +19,7 @@ private:
   void _delete();
   void _copy(Hash_node *p_table);
   int _find(const Key &k) const;
+  void _rehash();
 public:
 
   /*
