@@ -97,7 +97,7 @@ template <typename Key>
 void Hashtable<Key>::insert(const Key &k) {
   int i = _find(k);
   if(_table[i]._est == ocupat && _table[i]._k != k) {
-    //Redispersió
+    
   }
 
   if(_table[i]._est != ocupat) {
